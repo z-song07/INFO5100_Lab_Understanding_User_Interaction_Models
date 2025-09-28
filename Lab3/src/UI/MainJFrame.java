@@ -84,7 +84,6 @@ public class MainJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAccountMngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountMngActionPerformed
-        // Create account manager wo
         AccountManagerWorkAreaJPanel panel = new AccountManagerWorkAreaJPanel(userProcessContainer, accountDirectory);
         userProcessContainer.add("AccountManagerWorkAreaJPanel", panel);
         

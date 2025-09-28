@@ -4,17 +4,26 @@
  */
 package UI.AccountManager;
 
+import Model.Account;
+import Model.AccountDirectory;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author csong
  */
 public class CreateAccountJPanel extends javax.swing.JPanel {
-
+    JPanel userProcessContainer;
+    AccountDirectory accountDirectory;
     /**
      * Creates new form CreateAccountJPanel
      */
-    public CreateAccountJPanel() {
+    public CreateAccountJPanel(JPanel container, AccountDirectory directory) {
         initComponents();
+        this.userProcessContainer = container;
+        this.accountDirectory = directory;
     }
 
     /**
@@ -57,6 +66,11 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
         lblBalance.setText("Balance");
 
         btnCreateAccount.setText("Create Account");
+        btnCreateAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateAccountActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -120,8 +134,43 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // Back to Account Manager Work Area JPanel
-        
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
+        int balance;
+        
+        String routingNumber = fieldRoutingNumber.getText();
+        String accountNumber = fieldAccountNumber.getText();
+        String bankName = fieldBankName.getText();
+        
+        if (routingNumber.isBlank() || bankName.isBlank() || accountNumber.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Please fill out all the fields", "Error", JOptionPane.ERROR_MESSAGE);
+            //pause
+            return;
+        }
+        
+        try {
+            balance = Integer.parseInt(fieldBalance.getText());
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please check the balance input", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Account a = accountDirectory.addAccount();
+        a.setRoutingNumber(routingNumber);
+        a.setAccountNumber(accountNumber);
+        a.setBankName(bankName);
+        a.setBalance(balance);
+        
+        JOptionPane.showMessageDialog(this, "Account successfully created.", "Information", JOptionPane.INFORMATION_MESSAGE);
+        fieldRoutingNumber.setText("");
+        fieldAccountNumber.setText("");
+        fieldBankName.setText("");
+        fieldBalance.setText("");
+    }//GEN-LAST:event_btnCreateAccountActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

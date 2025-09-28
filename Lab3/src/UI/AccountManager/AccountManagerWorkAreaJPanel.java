@@ -5,6 +5,7 @@
 package UI.AccountManager;
 
 import Model.AccountDirectory;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -12,12 +13,15 @@ import javax.swing.JPanel;
  * @author csong
  */
 public class AccountManagerWorkAreaJPanel extends javax.swing.JPanel {
-
+    JPanel userProcessContainer;
+    AccountDirectory accountDirectory;
     /**
      * Creates new form AccountManagerWorkAreaJPanel
      */
-    public AccountManagerWorkAreaJPanel(JPanel userProcessContainer, AccountDirectory accountDirectory) {
+    public AccountManagerWorkAreaJPanel(JPanel container, AccountDirectory directory) {
         initComponents();
+        this.userProcessContainer = container;
+        this.accountDirectory = directory;
     }
 
     /**
@@ -42,6 +46,11 @@ public class AccountManagerWorkAreaJPanel extends javax.swing.JPanel {
         });
 
         btnManageAccount.setText("Manage Account");
+        btnManageAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageAccountActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -66,8 +75,20 @@ public class AccountManagerWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
-        // TODO add your handling code here:
+        CreateAccountJPanel panel = new CreateAccountJPanel(userProcessContainer, accountDirectory);
+        userProcessContainer.add("CreateAccountJPanel", panel);
+        
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnCreateAccountActionPerformed
+
+    private void btnManageAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageAccountActionPerformed
+        ManageAccountsJPanel panel = new ManageAccountsJPanel(userProcessContainer, accountDirectory);
+        userProcessContainer.add("ManageAccountsJPanel", panel);
+        
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnManageAccountActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
