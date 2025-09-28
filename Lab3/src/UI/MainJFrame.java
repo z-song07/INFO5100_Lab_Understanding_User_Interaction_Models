@@ -4,19 +4,28 @@
  */
 package UI;
 
+import Model.Account;
+import Model.AccountDirectory;
+import UI.AccountManager.AccountManagerWorkAreaJPanel;
+import java.awt.CardLayout;
+
 /**
  *
  * @author csong
  */
 public class MainJFrame extends javax.swing.JFrame {
     
+    private AccountDirectory accountDirectory;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainJFrame.class.getName());
-
+    
     /**
      * Creates new form MainJFrame
      */
     public MainJFrame() {
         initComponents();
+        
+        this.accountDirectory = new AccountDirectory();
+        generateDemoData();
     }
 
     /**
@@ -60,24 +69,13 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(topJPanelLayout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(btnAccountMng)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         splitPane.setLeftComponent(topJPanel);
 
         userProcessContainer.setBackground(new java.awt.Color(255, 204, 204));
-
-        javax.swing.GroupLayout userProcessContainerLayout = new javax.swing.GroupLayout(userProcessContainer);
-        userProcessContainer.setLayout(userProcessContainerLayout);
-        userProcessContainerLayout.setHorizontalGroup(
-            userProcessContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-        );
-        userProcessContainerLayout.setVerticalGroup(
-            userProcessContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 615, Short.MAX_VALUE)
-        );
-
+        userProcessContainer.setLayout(new java.awt.CardLayout());
         splitPane.setRightComponent(userProcessContainer);
 
         getContentPane().add(splitPane, java.awt.BorderLayout.CENTER);
@@ -86,7 +84,12 @@ public class MainJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAccountMngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountMngActionPerformed
-        // TODO add your handling code here:
+        // Create account manager wo
+        AccountManagerWorkAreaJPanel panel = new AccountManagerWorkAreaJPanel(userProcessContainer, accountDirectory);
+        userProcessContainer.add("AccountManagerWorkAreaJPanel", panel);
+        
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnAccountMngActionPerformed
 
     /**
@@ -120,4 +123,18 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel topJPanel;
     private javax.swing.JPanel userProcessContainer;
     // End of variables declaration//GEN-END:variables
+
+    private void generateDemoData() {
+        Account newAccount1 = accountDirectory.addAccount();
+        newAccount1.setAccountNumber("9999999999999999");
+        newAccount1.setRoutingNumber("888888888888888");
+        newAccount1.setBankName("Bank of America");
+        newAccount1.setBalance(200);
+        
+        Account newAccount2 = accountDirectory.addAccount();
+        newAccount2.setAccountNumber("6419281302");
+        newAccount2.setRoutingNumber("928357230491");
+        newAccount2.setBankName("Chase Bank");
+        newAccount2.setBalance(1000);
+    }
 }
