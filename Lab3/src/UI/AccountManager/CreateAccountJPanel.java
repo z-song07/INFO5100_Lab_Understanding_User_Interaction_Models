@@ -47,6 +47,8 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
         fieldBalance = new javax.swing.JTextField();
         btnCreateAccount = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 204, 204));
+
         btnBack.setText("<<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

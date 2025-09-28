@@ -7,6 +7,7 @@ package UI.AccountManager;
 import Model.Account;
 import Model.AccountDirectory;
 import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -51,6 +52,8 @@ public class ViewAccountsJPanel extends javax.swing.JPanel {
         lblBankName = new javax.swing.JLabel();
         fieldRoutingNumber = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(255, 204, 204));
 
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -148,8 +151,14 @@ public class ViewAccountsJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // Back to Account Manager Work Area JPanel
         userProcessContainer.remove(this);
+        
+        // This will reach to the previous panel and trigger an update
+        Component[] panelStack = userProcessContainer.getComponents();
+        JPanel lastPanel = (JPanel) panelStack[panelStack.length - 1];
+        ManageAccountsJPanel manageAccountsJPanel = (ManageAccountsJPanel) lastPanel;
+        manageAccountsJPanel.populateTable();
+        
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed

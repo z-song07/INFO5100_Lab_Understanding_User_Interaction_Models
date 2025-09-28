@@ -47,6 +47,8 @@ public class ManageAccountsJPanel extends javax.swing.JPanel {
         btnDeleteAccount = new javax.swing.JButton();
         fieldSearch = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 204, 204));
+
         btnBack.setText("<<<Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,6 +177,7 @@ public class ManageAccountsJPanel extends javax.swing.JPanel {
             int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete the selected account?", "Warning", JOptionPane.WARNING_MESSAGE);
             if (dialogResult == JOptionPane.YES_OPTION) {
                 Account selectedAccount = (Account) tblAccounts.getValueAt(selectedRow, 0);
+                accountDirectory.removeAccount(selectedAccount);
                 populateTable();
             } else {
                 JOptionPane.showMessageDialog(null, "Please select an account from the list", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -190,6 +193,7 @@ public class ManageAccountsJPanel extends javax.swing.JPanel {
             
             if (foundAccount != null) {
                 ViewAccountsJPanel panel = new ViewAccountsJPanel(userProcessContainer, accountDirectory, foundAccount);
+                userProcessContainer.add("ViewAccountJPanel", panel);
                 CardLayout layout = (CardLayout) userProcessContainer.getLayout();
                 layout.next(userProcessContainer);
             } else {
@@ -213,7 +217,7 @@ public class ManageAccountsJPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblAccounts;
     // End of variables declaration//GEN-END:variables
 
-    private void populateTable() {
+    public void populateTable() {
         DefaultTableModel model = (DefaultTableModel) tblAccounts.getModel();
         model.setRowCount(0);
         
