@@ -43,10 +43,13 @@ public class MainJFrame extends javax.swing.JFrame {
         userProcessContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 800));
 
         splitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        splitPane.setPreferredSize(new java.awt.Dimension(800, 700));
 
         topJPanel.setBackground(new java.awt.Color(255, 255, 204));
+        topJPanel.setPreferredSize(new java.awt.Dimension(800, 100));
 
         btnAccountMng.setText("Open Account Manager Work Area");
         btnAccountMng.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +78,7 @@ public class MainJFrame extends javax.swing.JFrame {
         splitPane.setLeftComponent(topJPanel);
 
         userProcessContainer.setBackground(new java.awt.Color(255, 204, 204));
+        userProcessContainer.setPreferredSize(new java.awt.Dimension(800, 500));
         userProcessContainer.setLayout(new java.awt.CardLayout());
         splitPane.setRightComponent(userProcessContainer);
 
