@@ -166,7 +166,7 @@ public class ViewAccountsJPanel extends javax.swing.JPanel {
         String accountNumber = fieldAccountNumber.getText();
         String bankName = fieldBankName.getText();
         
-        if (bankName.isBlank() || accountNumber.isBlank()) {
+        if (bankName.isBlank() || accountNumber.isBlank()|| routingNumber.isBlank()) {
             JOptionPane.showMessageDialog(this, "All fields are mandatory", "Error", JOptionPane.ERROR_MESSAGE);
             //pause
             return;
