@@ -166,7 +166,7 @@ public class ViewAccountsJPanel extends javax.swing.JPanel {
         String accountNumber = fieldAccountNumber.getText();
         String bankName = fieldBankName.getText();
         
-        if (routingNumber.isBlank() || bankName.isBlank() || accountNumber.isBlank()) {
+        if (bankName.isBlank() || accountNumber.isBlank()) {
             JOptionPane.showMessageDialog(this, "All fields are mandatory", "Error", JOptionPane.ERROR_MESSAGE);
             //pause
             return;
@@ -182,7 +182,7 @@ public class ViewAccountsJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void refreshTextfields() {
-        fieldRoutingNumber.setText(account.getRoutingNumber());
+        fieldRoutingNumber.setText(String.valueOf(account.getRoutingNumber()));
         fieldAccountNumber.setText(account.getAccountNumber());
         fieldBankName.setText(account.getBankName());
     }

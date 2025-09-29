@@ -149,7 +149,7 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
         String accountNumber = fieldAccountNumber.getText();
         String bankName = fieldBankName.getText();
         
-        if (routingNumber.isBlank() || bankName.isBlank() || accountNumber.isBlank()) {
+        if (bankName.isBlank() || accountNumber.isBlank() || routingNumber.isBlank()) {
             JOptionPane.showMessageDialog(this, "Please fill out all the fields", "Error", JOptionPane.ERROR_MESSAGE);
             //pause
             return;
@@ -162,6 +162,7 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please check the balance input", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        
         Account a = accountDirectory.addAccount();
         a.setRoutingNumber(routingNumber);
         a.setAccountNumber(accountNumber);
